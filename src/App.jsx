@@ -3,8 +3,21 @@ import { Footer } from "./Footer";
 import { Movie } from "./Movie";
 import { HBar } from "./NavBar";
 import image1 from "./assets/movie.png";
+import Counter from "./Counter";
 
 export default function App() {
+  //React Hooks
+  // They are special functions that let you "hook into" React features
+  // They let you use state and other React features without writing a class
+  // useState is a Hook that lets you add React state to function components
+  // useEffect is a Hook that lets you perform side effects in function components
+  // useContext is a Hook that lets you subscribe to React context without introducing nesting
+  // useReducer is a Hook that lets you manage complex state logic in function components
+  // useRef is a Hook that lets you access DOM nodes directly
+  // useMemo is a Hook that lets you optimize performance by memoizing expensive calculations
+  // useCallback is a Hook that lets you memoize functions to prevent unnecessary re-renders
+  // useLayoutEffect is a Hook that lets you perform side effects synchronously after all DOM mutations
+  // useImperativeHandle is a Hook that lets you customize the instance value that is exposed when using React.forwardRef
   // We create moviechild, we styled it in the movie component, we are now going to pass data into it everytime we call it
   return (
     <div>
@@ -56,6 +69,7 @@ export default function App() {
           description="Season 7 - Episode Revealed Featuring stand-alone dramas -- sharp, suspenseful, satirical tales that explore techno-paranoia -- Black Mirror is a contemporary reworking of The Twilight Zone with stories that tap into the collective unease about the modern world."
         />
       </div>
+      <Counter />
       <Footer />
     </div>
   );
