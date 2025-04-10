@@ -1,30 +1,62 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import image1 from "../assets/movie.png";
 import { Movie } from "../componenets/Movie";
 
-// useEffect is react that handles side effects in functional components
-// sideffect like fetching data from a database, check if windows size, etc
 export default function HomePage() {
-  useEffect(() => {
-    //user can only wathc movie on laptop size - 1000px
-    function useLaptop() {
-      // check if the window size is less than 1000px
-      if (window.innerWidth < 1000) {
-        alert("Pls download the app to watch the movie");
-      }
-    }
+  const [allMovies, setAllMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-    useLaptop();
+  async function fetchMovie() {
+    setLoading(true);
+    try {
+      let headersList = {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZGI2MTc2NTdiZmY4NDgzNTQzMmRmOWM0YTM4YjRmYSIsIm5iZiI6MTc0NDI4NjM0Ni42MzkwMDAyLCJzdWIiOiI2N2Y3YjI4YWRlNWU0ZGVjNjJhZDJkYzciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.QGEpV56tjTgJgEGiUyl_n7Ckmklf_hFymdBdQTueSfg",
+      };
+
+      let response = await fetch(
+        "https://api.themoviedb.org/3/discover/movie?page=2",
+        {
+          method: "GET",
+          headers: headersList,
+        }
+      );
+
+      let data = await response.json();
+      setLoading(false);
+      setAllMovies(data.results);
+      console.log(data);
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+    }
+  }
+
+  useEffect(() => {
+    fetchMovie();
   }, []);
 
-  //useeffect has two paramaters,
-  // the first is a function that runs when the component mounts,
-  // and the second is an array of dependencies that tells react when to run the function again.
-  // If you pass an empty array, it will only run once when the component mounts.
-
+  if (loading) {
+    return (
+      <>
+        <p className="h-screen">Loading..</p>
+      </>
+    );
+  }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 gap-8">
-      <Movie
+      {allMovies.map((movie) => (
+        <Movie
+          key={movie.id}
+          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          title={movie.original_title}
+          description={movie.overview}
+          rating={movie.vote_average}
+        />
+      ))}
+
+      {/* <Movie
         image={image1}
         title="Fast and Furious"
         description="Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs."
@@ -68,7 +100,14 @@ export default function HomePage() {
         image="https://images.unsplash.com/photo-1615986201152-7686a4867f30?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1vdmllc3xlbnwwfHwwfHx8MA%3D%3D"
         title="Black Mirror"
         description="Season 7 - Episode Revealed Featuring stand-alone dramas -- sharp, suspenseful, satirical tales that explore techno-paranoia -- Black Mirror is a contemporary reworking of The Twilight Zone with stories that tap into the collective unease about the modern world."
-      />
+      /> */}
     </div>
   );
 }
+
+//API - Application Programming Interface
+
+// FRONTEND - API - SERVER - DATABASE
+
+//TO FETCH INFORMATION FROM THE SERVER
+//WE USE Fetch, Axios etc.
