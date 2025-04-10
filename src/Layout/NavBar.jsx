@@ -1,8 +1,11 @@
-import React from "react";
-import logo from "./assets/logo.png";
+import React, { useState } from "react";
+import logo from "../assets/logo.png";
 import { FaBars } from "react-icons/fa";
+import SideBar from "./SideBar";
 
 export function HBar() {
+  const [openSideBar, setOpenSideBar] = useState(false);
+
   return (
     <div className="bg-red-700 text-white flex justify-between py-4 px-8">
       <div className="flex gap-4 items-center">
@@ -16,8 +19,9 @@ export function HBar() {
         <li className="cursor-pointer hover:text-gray-300">People</li>
       </ul>
       <div className="sm:hidden flex items-center text-2xl cursor-pointer">
-        <FaBars />
+        <FaBars onClick={() => setOpenSideBar(!openSideBar)} />
       </div>
+      {openSideBar && <SideBar />}
     </div>
   );
 }
