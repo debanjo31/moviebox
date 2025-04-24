@@ -1,23 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function Counter() {
-  //   let count = 0;
-  //   function increaseCount() {
-  //     count++;
-  //     console.log(count);
-  //   }
-
-  //   function decreaseCount() {
-  //     count--;
-  //     console.log(count);
-  //   }
-
-  //useState
-  // const [state, setState] = useState(initialState);
   const [count, setCount] = useState(83);
-  //count is the state variable
-  //setCount is the function that updates the state variable
-  //initial state is 0
 
   function increaseCount() {
     //496, 503
@@ -42,7 +26,13 @@ export default function Counter() {
   }
 
   return (
-    <div className="bg-lime-900 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
+    <div
+      className={
+        count > 150
+          ? "bg-lime-900 p-8 shadow-lg flex flex-col items-center justify-center"
+          : "bg-yellow-900 p-8 shadow-lg flex flex-col items-center justify-center"
+      }
+    >
       <h1 className="text-3xl font-bold mb-4 text-white">Counter</h1>
       <p className="text-5xl text-white mb-4 my-8">{count}</p>
       <div className="flex gap-4 mt-8">

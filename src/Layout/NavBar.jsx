@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaBars } from "react-icons/fa";
 import SideBar from "./SideBar";
@@ -13,10 +14,15 @@ export function HBar() {
         <h1 className="text-2xl font-bold">Movie Box Office</h1>
       </div>
       <ul className="hidden sm:flex space-x-4 text-lg items-center">
-        <li className="cursor-pointer hover:text-gray-300">Home</li>
-        <li className="cursor-pointer hover:text-gray-300">Movies</li>
-        <li className="cursor-pointer hover:text-gray-300">TV Shows</li>
-        <li className="cursor-pointer hover:text-gray-300">People</li>
+        <NavLink to="/" className="cursor-pointer hover:text-gray-300">
+          Home
+        </NavLink>
+        <NavLink to="/request" className="cursor-pointer hover:text-gray-300">
+          Request
+        </NavLink>
+        <NavLink to="/counter" className="cursor-pointer hover:text-gray-300">
+          Counter
+        </NavLink>
       </ul>
       <div className="sm:hidden flex items-center text-2xl cursor-pointer">
         <FaBars onClick={() => setOpenSideBar(!openSideBar)} />
