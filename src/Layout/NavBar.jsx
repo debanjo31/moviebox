@@ -23,6 +23,18 @@ export function HBar() {
         <NavLink to="/counter" className="cursor-pointer hover:text-gray-300">
           Counter
         </NavLink>
+        <NavLink
+          to="/login"
+          className="cursor-pointer hover:text-gray-300 bg-blue-500 px-4 py-1 rounded-lg"
+        >
+          Login
+        </NavLink>
+        <NavLink
+          to="/signup"
+          className="cursor-pointer hover:text-gray-300 bg-white text-blue-500 px-4 py-1 rounded-lg"
+        >
+          Signup
+        </NavLink>
       </ul>
       <div className="sm:hidden flex items-center text-2xl cursor-pointer">
         <FaBars onClick={() => setOpenSideBar(!openSideBar)} />
