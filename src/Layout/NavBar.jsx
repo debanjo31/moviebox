@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaBars } from "react-icons/fa";
 import SideBar from "./SideBar";
 
 export function HBar() {
   const [openSideBar, setOpenSideBar] = useState(false);
+  const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+
+  const onLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   return (
     <div className="bg-red-700 text-white flex justify-between py-4 px-8">
       <div className="flex gap-4 items-center">
@@ -23,18 +30,33 @@ export function HBar() {
         <NavLink to="/counter" className="cursor-pointer hover:text-gray-300">
           Counter
         </NavLink>
-        <NavLink
-          to="/login"
-          className="cursor-pointer hover:text-gray-300 bg-blue-500 px-4 py-1 rounded-lg"
-        >
-          Login
-        </NavLink>
-        <NavLink
-          to="/signup"
-          className="cursor-pointer hover:text-gray-300 bg-white text-blue-500 px-4 py-1 rounded-lg"
-        >
-          Signup
-        </NavLink>
+        {token && (
+          <NavLink to="/profile" className="cursor-pointer hover:text-gray-300">
+            Profile
+          </NavLink>
+        )}
+        {!token && (
+          <NavLink
+            to="/login"
+            className="cursor-pointer hover:text-gray-300 bg-blue-500 px-4 py-1 rounded-lg"
+          >
+            Login
+          </NavLink>
+        )}
+        {!token && (
+          <NavLink
+            to="/signup"
+            className="cursor-pointer hover:text-gray-300 bg-white text-blue-500 px-4 py-1 rounded-lg"
+          >
+            Signup
+          </NavLink>
+        )}
+
+        {token && (
+          <button onClick={()=> onLogout()} className="cursor-pointer hover:text-gray-300 bg-white text-red-500 px-4 py-1 rounded-lg">
+            Logout
+          </button>
+        )}
       </ul>
       <div className="sm:hidden flex items-center text-2xl cursor-pointer">
         <FaBars onClick={() => setOpenSideBar(!openSideBar)} />

@@ -8,6 +8,7 @@ import RequestForm from "./componenets/RequestForm";
 import SingleMovie from "./pages/SingleMovie";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/movies/:id" element={<SingleMovie />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </div>

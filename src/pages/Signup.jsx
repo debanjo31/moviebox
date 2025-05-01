@@ -35,6 +35,8 @@ export default function Signup() {
       .post("http://127.0.0.1:5000/api/signup", formData)
       .then(function (response) {
         console.log(response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/");
       })
       .catch(function (error) {
